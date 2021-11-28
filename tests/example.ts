@@ -31,4 +31,15 @@ describe("example", () => {
     assert.ok(account.data.eq(new anchor.BN(123)));
     console.log(account.data);
   });
+
+  it("Is updated!", async () => {
+    await program.rpc.update(new anchor.BN(555), {
+      accounts: {
+        myAccount: myAccount.publicKey,
+      },
+    });
+    const account = await program.account.myAccount.fetch(myAccount.publicKey);
+    assert.ok(account.data.eq(new anchor.BN(555)));
+    console.log(account.data);
+  });
 });
